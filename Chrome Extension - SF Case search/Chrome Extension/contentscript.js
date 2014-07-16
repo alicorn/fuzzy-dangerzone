@@ -24,7 +24,7 @@ function caseQuery() {
     var caseQuery = sforce.connection.query("SELECT Id FROM Case WHERE CaseNumber = '" + result + "'");
     caseId = caseQuery.getArray("records");
     if (caseQuery.size == 1) {
-        window.location = URL = "https://na8.salesforce.com/" + caseId[0].Id;
+        window.location = URL = "https://" + window.location.host + "/" + caseId[0].Id;
     } else {
         alert("'" + result + " could not be found or is not a valid case number, please try again");
     }
