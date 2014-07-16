@@ -5,7 +5,7 @@
   "description": "This extension searches for cases via thier case number with a small popup.",
   "version": "1.0",
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "salesforce.png",
     "name": "Click to get search"
   },
   "background": {
@@ -41,8 +41,8 @@
                   "https://eu3.salesforce.com/*"                  
                   ],
   "icons": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
+      "16": "salesforce.png",
+      "48": "salesforce.png",
+      "128": "salesforce.png"
   }
 }
