@@ -5,5 +5,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         }, function () {
             console.log("Script Executed .. ");
         });
+    } else {
+    	alert("Please navigate to a salesforce page prior to using this.");
     }
 });
