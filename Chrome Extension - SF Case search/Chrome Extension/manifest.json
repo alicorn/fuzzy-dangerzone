@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "Salesforce Case Search",
+  "description": "This extension searches for cases via thier case number with a small popup.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "name": "Click to get search"
+  },
+  "background": {
+      "scripts": ["caseSearch.js"]
+  },
+  "permissions": ["https://na8.salesforce.com/*"],
+
+  "icons": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+  }
+}
