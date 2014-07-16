@@ -17,4 +17,4 @@ To install this Extenstion you will need to do the following:
 
 **Warning/Notes/Things to be fixed**
 
-\u2022 At the moment this will only allow a search from inside of Salesforce. You can not search from any other page.
+- At the moment this will only allow a search from inside of Salesforce. You can not search from any other page.
