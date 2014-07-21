@@ -19,8 +19,13 @@ loadScript("/soap/ajax/29.0/connection.js", function () {
     caseQuery();
 });
 
+var language = window.navigator.userLanguage || window.navigator.language;
+
+var promptMessage = chrome.i18n.getMessage("errorMsg");
+var whatCase = chrome.i18n.getMessage("whatCase");
+
 function caseQuery() {
-    var result = prompt("What is your case number?");
+    var result = prompt(whatCase);
     var caseQuery = sforce.connection.query("SELECT Id FROM Case WHERE CaseNumber = '" + result + "'");
     caseId = caseQuery.getArray("records");
     if (result == null) {
@@ -28,9 +33,10 @@ function caseQuery() {
     } else if (caseQuery.size == 1) {
         window.location = URL = "https://" + window.location.host + "/" + caseId[0].Id;
     } else {
-        alert("'" + result + "' could not be found or is not a valid case number, please try again");
+        alert("'" + result + "'" + promptMessage);
     }
-}
+};
+
 
 /*
 Salesforce.com AJAX Connector 29.0
@@ -1826,5 +1832,3 @@ sforce.connection.serverUrl = (typeof window.UserContext != "undefined") ? UserC
 if (typeof(__sfdcSessionId) != "undefined") {
     sforce.connection.sessionId = __sfdcSessionId;
 }
-
-// END OF SF JS

@@ -6,6 +6,8 @@ chrome.browserAction.onClicked.addListener(function (tab) {
             console.log("Script Executed .. ");
         });
     } else {
-    	alert("Please navigate to a salesforce page prior to using this.");
+    	var wrongTab = chrome.i18n.getMessage("wrongTab");
+		console.log(wrongTab);
+		alert(wrongTab);
     }
 });

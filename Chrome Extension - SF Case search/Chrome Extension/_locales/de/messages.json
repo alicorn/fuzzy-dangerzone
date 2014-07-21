@@ -1,0 +1,8 @@
+{
+  "appName": {
+    "message": "Salesforce Case Search"
+  },
+  "appDesc": {
+    "message": "Searches for cases using the case number."
+  }
+}
