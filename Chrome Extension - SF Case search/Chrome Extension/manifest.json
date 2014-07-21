@@ -1,9 +1,11 @@
 {
   "manifest_version": 2,
+  
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
 
-  "name": "Salesforce Case Search",
-  "description": "Searches for cases using the case number.",
-  "version": "1.0.1",
+  "version": "2.0",
   "browser_action": {
     "default_icon": "salesforce.png",
     "name": "Click to get search"
@@ -11,35 +13,7 @@
   "background": {
       "scripts": ["caseSearch.js"]
   },
-  "permissions": ["https://na0.salesforce.com/*",
-                  "https://na1.salesforce.com/*",
-                  "https://na2.salesforce.com/*",
-                  "https://na3.salesforce.com/*",
-                  "https://na4.salesforce.com/*",
-                  "https://na5.salesforce.com/*",
-                  "https://na6.salesforce.com/*",
-                  "https://na7.salesforce.com/*",
-                  "https://na8.salesforce.com/*",
-                  "https://na9.salesforce.com/*",
-                  "https://na10.salesforce.com/*",
-                  "https://na11.salesforce.com/*",
-                  "https://na12.salesforce.com/*",
-                  "https://na13.salesforce.com/*",
-                  "https://na14.salesforce.com/*",
-                  "https://na15.salesforce.com/*",
-                  "https://na16.salesforce.com/*",
-                  "https://na17.salesforce.com/*",
-                  "https://na18.salesforce.com/*",
-                  "https://na19.salesforce.com/*",
-                  "https://na20.salesforce.com/*",
-                  "https://na21.salesforce.com/*",
-                  "https://ap0.salesforce.com/*",
-                  "https://ap1.salesforce.com/*",
-                  "https://eu0.salesforce.com/*",
-                  "https://eu1.salesforce.com/*",
-                  "https://eu2.salesforce.com/*",
-                  "https://eu3.salesforce.com/*"                  
-                  ],
+  "permissions": ["*://*.salesforce.com/"],
   "icons": {
       "16": "salesforce.png",
       "48": "salesforce.png",

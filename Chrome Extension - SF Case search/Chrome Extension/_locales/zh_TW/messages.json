@@ -1,0 +1,17 @@
+{
+  "appName": {
+    "message": "Salesforce 個案搜尋"
+  },
+  "appDesc": {
+    "message": "使用個案編號搜尋"
+  },
+  "errorMsg" : {
+          "message": " 無搜尋結果或非正確個案編號，請重試"
+  },
+  "wrongTab" : {
+          "message": "請在使用前先登入Salesforce"
+  },
+  "whatCase" : {
+    "message": "請輸入個案編號？"
+  }
+}

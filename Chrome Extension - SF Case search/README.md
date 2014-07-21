@@ -18,4 +18,23 @@ To install this Extenstion you will need to do the following:
 **Warning/Notes/Things to be fixed**
 
 - At the moment this will only allow a search from inside of Salesforce. You can not search from any other page.
+<<<<<<< HEAD
+
+
+**We now support the following**
+English
+English (Great Britain)
+English (USA)
+Spanish
+Spanish (Latin America and Caribbean)
+Filipino
+Italian
+Polish
+Portuguese (Brazil)
+Portuguese (Portugal)
+Romanian
+Russian
+Chinese (Taiwan)
+=======
 - Cross language support.
+>>>>>>> bd1cdea1ab80413807a0d0c6c5577844051e5de0
