@@ -35,6 +35,3 @@ Portuguese (Portugal)
 Romanian
 Russian
 Chinese (Taiwan)
-=======
-- Cross language support.
->>>>>>> bd1cdea1ab80413807a0d0c6c5577844051e5de0
