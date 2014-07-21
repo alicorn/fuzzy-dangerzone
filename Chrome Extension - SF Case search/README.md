@@ -21,15 +21,27 @@ To install this Extenstion you will need to do the following:
 
 **We now support the following**
 English
+
 English (Great Britain)
+
 English (USA)
+
 Spanish
+
 Spanish (Latin America and Caribbean)
+
 Filipino
+
 Italian
+
 Polish
+
 Portuguese (Brazil)
+
 Portuguese (Portugal)
+
 Romanian
+
 Russian
+
 Chinese (Taiwan)
