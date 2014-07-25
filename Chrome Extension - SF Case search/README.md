@@ -15,9 +15,8 @@ To install this Extenstion you will need to do the following:
 
 4) Enjoy!
 
-__**Bugs**__
+**Bugs**
 - At the moment this will only allow a search from inside of Salesforce. You can not search from any other page.
-- If you are on a salesforce page and have not logged in yet, no error message appears.
 
 **We now support the following**
 - English
