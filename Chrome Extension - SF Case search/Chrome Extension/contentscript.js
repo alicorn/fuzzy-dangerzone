@@ -50,15 +50,28 @@ var whatCase = chrome.i18n.getMessage("whatCase");
 
 function caseQuery() {
     if(blockSearch == false){
-        var result = prompt(whatCase);
-        var caseQuery = sforce.connection.query("SELECT Id FROM Case WHERE CaseNumber = '" + result + "'");
-        caseId = caseQuery.getArray("records");
-        if (result == null) {
-            return false;
-        } else if (caseQuery.size == 1) {
-            window.location = URL = "https://" + window.location.host + "/" + caseId[0].Id;
-        } else {
-            alert("'" + result + "'" + promptMessage);
+        var result = prompt(whatCase.trim());
+        if(result.search(":ref") == -1) {
+            var caseQuery = sforce.connection.query("SELECT Id FROM Case WHERE CaseNumber = '" + result + "'");
+            caseId = caseQuery.getArray("records");
+            if (result == null) {
+                return false;
+            } else if (caseQuery.size == 1) {
+                window.location = URL = "https://" + window.location.host + "/" + caseId[0].Id;
+            } else {
+                alert("'" + result + "'" + promptMessage);
+            }
+        } else if(result.search(":ref") == 10) {
+            queryId = result.substring(0,10).split("C").join("C00000");
+            var caseQuery = sforce.connection.query("SELECT Id FROM Case WHERE Id = '" + queryId + "'");
+            caseId = caseQuery.getArray("records");
+            if (result == null) {
+                return false;
+            } else if (caseQuery.size == 1) {
+                window.location = URL = "https://" + window.location.host + "/" + caseId[0].Id;
+            } else {
+                alert("'" + result + "'" + promptMessage);
+            }
         }
     } else if(blockSearch == true){
         alert("You must log into Salesforce prior to running the case search.");
