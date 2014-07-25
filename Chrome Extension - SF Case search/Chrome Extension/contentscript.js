@@ -21,11 +21,11 @@ function loadScript(url, callback) {
     };
     head.appendChild(script);
 }
-loadScript("/soap/ajax/29.0/connection.js", function() {
+loadScript("/soap/ajax/31.0/connection.js", function() {
     caseQuery();
 });
 
-var JSFile = "https://" + window.location.host + "/soap/ajax/29.0/connection.js";
+var JSFile = "https://" + window.location.host + "/soap/ajax/31.0/connection.js";
 
 var req = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
 if (req == null) {
@@ -61,9 +61,11 @@ function caseQuery() {
             } else {
                 alert("'" + result + "'" + promptMessage);
             }
-        } else if(result.search(":ref") == 10) {
-            queryId = result.substring(0,10).split("C").join("C00000");
-            var caseQuery = sforce.connection.query("SELECT Id FROM Case WHERE Id = '" + queryId + "'");
+        } else if(result.search(":ref") != -1) {
+            var search = result.search("500");
+            var queryId = result.substring(search);
+            var finalQueryId = queryId.substring(0,10).split("C").join("C00000");
+            var caseQuery = sforce.connection.query("SELECT Id FROM Case WHERE Id = '" + finalQueryId + "'");
             caseId = caseQuery.getArray("records");
             if (result == null) {
                 return false;
