@@ -5,18 +5,18 @@
   "description": "__MSG_appDesc__",
   "default_locale": "en",
 
-  "version": "1",
+  "version": "1.0",
   "browser_action": {
-  /*  "default_icon": "salesforce.png",*/
-    "name": "Click to get search"
+    "default_icon": "salesforce.png",
+    "name": "Click to search"
   },
   "background": {
       "scripts": ["userSearch.js"]
   },
-  "permissions": ["*://*.salesforce.com/"]/*,
+  "permissions": ["*://*.salesforce.com/"],
   "icons": {
       "16": "salesforce.png",
       "48": "salesforce.png",
       "128": "salesforce.png"
-  }*/
+  }
 }

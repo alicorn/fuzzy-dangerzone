@@ -54,68 +54,71 @@ try {
 /* Create variable messages for the user to see */
 var whatUser = /* chrome.i18n.getMessage("whatCase"); */ "Please enter a users name, email address or Id.";
 var promptMessage = /* chrome.i18n.getMessage("errorMsg"); */ " was not a valid user's Name, Email Address or Id or it could not be found.\r\nPlease try again.";
-var result = prompt(whatUser.trim());
+var wrongId = " was recognised as an Id, but could not be found, please try again.";
 
 /* Start search function */
 function userQuery() {
-    if(result == null) {
-        return false;
-    } else {
-        /* Make use of session ID RegEx, if the session ID is not found or valid then it skips to the else part of the IF statement */
-        if(blockSearch == false){
-            /* Searches the string that the user entered, if it contains an @ symbol then it runs a query for the email and username in SF */
-            if(result.indexOf("@") != -1) {
-                var userQuery = sforce.connection.query("SELECT Id, FirstName, LastName FROM User WHERE Email LIKE '%" + result + "%' OR Username LIKE '%" + result + "%' LIMIT 10");
-                /* Converts the query to an Array so it can be read easier by the JS */
-                var userId = userQuery.getArray("records");
-                    /* If the query only eturns one user, then automatically go to the users profile page */
-                if (userQuery.size == 1) {
-                    window.location = URL = "https://" + window.location.host + "/" + userId[0].Id + "?noredirect=1";
-                } else  if (userQuery.size > 1) {
-                    /* Create blank variable called num, in the case of the query returning multiple users */
-                    var num = "";
-                    /* Run through all of the users in a for loop and append a number to the beginning of the user */
-                    for(var i = 0; i < userQuery.size; i++){
-                        num +=  (i+1) + ") " + userId[i].FirstName + userId[i].LastName + "\r\n";
-                    };
-                    /* Prompt the user to select the corresponding number to the the relevant name on the search list, then open the users profile */
-                    var idSelect = prompt("Please enter the User number from the list below, if they have not been foudn then please try again:\r\n" + num);
-                    var id = userId[idSelect + 1].Id;
-                    window.location = URL = "https://" + window.location.host + "/" + id + "?noredirect=1";
-                } else {
-                    /* If there is an error and no one if found, throw error alert message */
-                    alert("'" + result + "'" + promptMessage);
-                }
-                /* If a user ID is entered, instanly open user profile */
-            } else if(result.indexOf("005") != -1) {
+    /* If the session ID is not recognised or is not valid then throw error to the user */
+    if(blockSearch == true) {
+        alert("You must log into Salesforce prior to running the User search.");
+    } else if(blockSearch == false) {
+        var result = prompt(whatUser.trim());
+        if(result == null) {
+            return false;
+        } else if(result.indexOf("@") != -1) {
+            var userQuery = sforce.connection.query("SELECT Id, Name FROM User WHERE (Email LIKE '%" + result + "%' OR Username LIKE '%" + result + "%') AND isActive = true LIMIT 10");
+            /* Converts the query to an Array so it can be read easier by the JS */
+            var userId = userQuery.getArray("records");
+                /* If the query only eturns one user, then automatically go to the users profile page */
+            if (userQuery.size == 1) {
+                window.location = URL = "https://" + window.location.host + "/" + userId[0].Id + "?noredirect=1";
+            } else  if (userQuery.size > 1) {
+                /* Create blank variable called num, in the case of the query returning multiple users */
+                var num = "";
+                /* Run through all of the users in a for loop and append a number to the beginning of the user */
+                for(var i = 0; i < userQuery.size; i++) {
+                    num +=  (i+1) + ") " + userId[i].Name + "\r\n";
+                };
+                /* Prompt the user to select the corresponding number to the the relevant name on the search list, then open the users profile */
+                var idSelect = prompt("Please enter the User number from the list below, if they have not been foudn then please try again:\r\n" + num);
+                var idFinal = idSelect - 1;
+                var id = userId[idFinal].Id;
+                window.location = URL = "https://" + window.location.host + "/" + id + "?noredirect=1";
+            } else {
+                /* If there is an error and no one if found, throw error alert message */
+                alert("'" + result + "'" + promptMessage);
+            }
+            /* If a user ID is entered, instanly open user profile */
+        } else if(result.indexOf("005") != -1) {
+            if(result.length == 15 || result.length == 18) {
                 window.location = URL = "https://" + window.location.host + "/" + result + "?noredirect=1";
-                /* If user enters something that is not recognised as an Email or ID then search for user name's */
-            } else if(result != ""){
-                var userQuery = sforce.connection.query("SELECT Id, Full_Name__c FROM User WHERE Full_Name__c LIKE '%" + result + "%' LIMIT 10");
-                var userId = userQuery.getArray("records");
-                /* If only one user is found, instantly go to the users profile */
-                if (userQuery.size == 1) {
-                    window.location = URL = "https://" + window.location.host + "/" + userId[0].Id + "?noredirect=1";
-                } else  if (userQuery.size > 1) {
-                    /* Create blank variable called num, in the case of the query returning multiple users */
-                    var num = "";
-                    /* Run through all of the users in a for loop and append a number to the beginning of the user */
-                    for(var i = 0; i < userQuery.size; i++){
-                        num +=  (i+1) + ") " + userId[i].Full_Name__c + "\r\n";
-                    };
-                    /* Prompt the user to select the corresponding number to the the relevant name on the search list, then open the users profile */
-                    var idSelect = prompt("Please enter the User number from the list below, if they have not been found then please try again:\r\n" + num + "\r\nMax of 10 loaded.");
-                    var id = userId[idSelect].Id;
-                    window.location = URL = "https://" + window.location.host + "/" + id + "?noredirect=1";
-                } else {
-                    alert("'" + result + "'" + promptMessage);
-                }
+            } else {
+                alert("'" + result + "'" + wrongId);
+            }
+            /* If user enters something that is not recognised as an Email or ID then search for user name's */
+        } else if(result != "") {
+            var userQuery = sforce.connection.query("SELECT Id, Name FROM User WHERE Name LIKE '%" + result + "%' AND isActive = true LIMIT 10");
+            var userId = userQuery.getArray("records");
+            /* If only one user is found, instantly go to the users profile */
+            if (userQuery.size == 1) {
+                window.location = URL = "https://" + window.location.host + "/" + userId[0].Id + "?noredirect=1";
+            } else  if (userQuery.size > 1) {
+                /* Create blank variable called num, in the case of the query returning multiple users */
+                var num = "";
+                /* Run through all of the users in a for loop and append a number to the beginning of the user */
+                for(var i = 0; i < userQuery.size; i++) {
+                    num +=  (i+1) + ") " + userId[i].Name + "\r\n";
+                };
+                /* Prompt the user to select the corresponding number to the the relevant name on the search list, then open the users profile */
+                var idSelect = prompt("Please enter the User number from the list below, if they have not been found then please try again:\r\n" + num + "\r\nMax of 10 loaded.");
+                var idFinal = idSelect - 1;
+                var id = userId[idFinal].Id;
+                window.location = URL = "https://" + window.location.host + "/" + id + "?noredirect=1";
             } else {
                 alert("'" + result + "'" + promptMessage);
             }
-            /* If the session ID is not recognised or is not valid then throw error to the user */
-        } else if(blockSearch == true){
-            alert("You must log into Salesforce prior to running the User search.");
-        }
+        } else {
+            alert("'" + result + "'" + promptMessage);
+        } 
     }
 }
