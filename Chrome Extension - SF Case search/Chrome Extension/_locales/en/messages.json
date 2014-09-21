@@ -12,6 +12,6 @@
           "message": "Please navigate to a salesforce page prior to using this."
   },
   "whatCase" : {
-    "message": "What is your case number?"
+    "message": "Please enter a case number or case reference number."
   }
 }
