@@ -1,0 +1,17 @@
+{
+  "appName": {
+    "message": "Salesforce User Search"
+  },
+  "appDesc": {
+    "message": "Searches for Users using the Id, Usernam/Email Address or Name as well as thier name."
+  },
+  "errorMsg" : {
+          "message": " could not be found or is not a valid Id, Usernam/Email Address or Name, please try again"
+  },
+  "wrongTab" : {
+          "message": "Please navigate to a salesforce page prior to using this."
+  },
+  "whatCase" : {
+    "message": "Please enter a User Id, Usernam/Email Address or Name"
+  }
+}
